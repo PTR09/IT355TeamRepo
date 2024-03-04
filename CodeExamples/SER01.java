@@ -3,6 +3,16 @@ import java.io.*;
 
 public class SER01 {
 
+    // Serialization
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+    }
+
+    // Deserialization
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+    }
+
     // Serialize object to byte array
     public static byte[] serializeObject(Object obj) throws IOException {
         ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
@@ -22,10 +32,14 @@ public class SER01 {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         String exampleString = "Hello, World!";
-        byte[] serializedData = serializeObject(exampleString);
+        
+        // Serialization
+        byte[] serializedObj = serializeObject(exampleString);
 
         // Deserialization
-        String deserializedString = (String) deserializeObject(serializedData);
-        System.out.println(deserializedString); // Output: Hello, World!
+        String deserializedString = (String) deserializeObject(serializedObj);
+        
+        // Output: Hello, World!
+        System.out.println(deserializedString);
     }
 }

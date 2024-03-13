@@ -23,7 +23,7 @@ public class LCK08 {
 
     private boolean someCondition() {
         // Simulated condition
-        return true;
+        return false;
     }
 
     public static void main(String[] args) {
@@ -31,4 +31,3 @@ public class LCK08 {
         example.doSomething();
     }
 }
-

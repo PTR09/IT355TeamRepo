@@ -1,35 +1,32 @@
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class IDS11 {
+    public static void main(String[] args) {
+        String input = "IsThisValid?";
 
-  // Sanitizes the input string
-  public static String filterString(String str) {
-    // Normalize the string
-    String normalizedString = Normalizer.normalize(str, Form.NFKC);
+        // Perform string modifications before validation
+        String modifiedString = modifyString(input);
 
-    // Replaces all noncharacter code points with Unicode U+FFFD
-    normalizedString = normalizedString.replaceAll("[\\p{Cn}]", "\uFFFD");
+        // Validate the modified string
+        boolean isValid = validateString(modifiedString);
 
-    // Checks if '<script>' in the input, if so it would be invalid
-    Pattern pattern = Pattern.compile("<script>");
-    Matcher matcher = pattern.matcher(normalizedString);
-    if (matcher.find()) {
-      throw new IllegalArgumentException("Invalid input");
+        // If modifications were made here, like removing the '?',
+        // the string would then be valid which is not good practice.
+
+        // Output validation result
+        if (isValid) {
+            System.out.println("The modified string is valid.");
+        } else {
+            System.out.println("The modified string is not valid.");
+        }
     }
-    // String has been sanitized
-    return normalizedString;
-  }
 
-  public static void main(String[] args) {
-    // Example usage with a potentially malicious input
-    String maliciousInput = "Hello, this is a <scr" + "\uFDEF" + "ipt> example";
-    // Below string would give 'Invalid input'
-    // String maliciousInput = "Hello, this is a <script> example!";
-    String sanitizedInput = filterString(maliciousInput);
-    System.out.println("Sanitized input: " + sanitizedInput);
-    // If the string was altered again here, it would need to be re-sanitized
-  }
+    // Perform any string modifications before validation
+    public static String modifyString(String input) {
+        // Example: Convert the string to lowercase
+        return input.replace('?', '0');
+    }
+
+    public static boolean validateString(String input) {
+        // Example: Check if the string contains only letters or numbers using regex
+        return input.matches("[a-zA-Z0-9]+");
+    }
 }

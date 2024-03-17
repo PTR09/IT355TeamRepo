@@ -10,15 +10,26 @@ import java.util.Scanner;
 SEC05 - All fields that shouldn't be accessed outside the class should be private.
 EXP00 - Do not ignore values returned by methods.
 OBJ10 - Do not use public static nonfinal fields.
-MET01 - Never use assertions to validate method arguments.
+OBJ11 - Be wary of letting constructors throw exceptions.
+MET00 - Ensure method arguments are compatible with what you do with the variable.
+FIO14 - Perform proper cleanup at program termination.
+MET05 - Ensure that constructors do not call overridable methods.
+MET12 - Do not use finalizers.
 
+Recommendations used:
+EXP51 - Do not perform assignments in conditional expressions.
+EXP51 - Use braces for the body of an if, for, or while statement.
+DCL52 - Do not declare more than one variable per declaration.
+DCL50 - Use visually distinct identifiers.
+OBJ54 - Do not attempt to help the garbage collector by setting local reference variables to null.
+DCL53 - Minimize the scope of variables.
 
 */
 
 
 public class ATM {
 
-    private static int choice = 0; //SEC05, OBJ10
+    private static int choice = 0; //SEC05, OBJ10, DCL53
 
     public static void main(String[] args) {
         Bank account = new Bank(0.00);
@@ -27,7 +38,7 @@ public class ATM {
         
     }
 
-    private static void operations(Bank account) { //MET01
+    private static void operations(Bank account) { //MET00
         Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
@@ -69,7 +80,7 @@ public class ATM {
                     System.out.println("Thank you for using the ATM.");
                     scanner.close();
                     printReciept(account);
-                    System.exit(0);
+                    System.exit(0); //FIO14
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.\n");
@@ -94,8 +105,8 @@ public class ATM {
             Transaction transaction = transactions.get(i);
             Double amount = transaction.getAmount();
             LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(transaction.getTimestamp()), ZoneOffset.ofHours(7));
-            String formattedDate = date.format(dateFormat);
-            if (amount > 0) {
+            String formattedDate = date.format(dateFormat); //DCL50
+            if (amount > 0) { //EXP51, EXP52
                 System.out.println("Deposit: $" + amount + " at " + formattedDate);
             } else {
                 System.out.println("Withdrawal: -$" + Math.abs(amount) + " at " + formattedDate);
@@ -106,10 +117,10 @@ public class ATM {
 }
 
 class Transaction {
-    private double amount;
+    private double amount; //DCL52, OBJ54
     private long timestamp;
 
-    public Transaction(double amount, long timestamp) {
+    public Transaction(double amount, long timestamp) { //OBJ11, MET05
         this.amount = amount;
         this.timestamp = timestamp;
     }

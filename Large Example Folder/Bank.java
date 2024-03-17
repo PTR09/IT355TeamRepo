@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+LCK08-J: Ensure actively held locks are released on exceptional conditions
+MET01-J: Never use assertions to validate method arguments
+OBJ01-J: Limit accessibility of fields
+OBJ07-J: Sensitive classes must not let themselves be copied 
+
+*/
+
 public class Bank implements Cloneable{
 
     private static final double MAX_BALANCE = 1000000.0;
@@ -19,7 +27,7 @@ public class Bank implements Cloneable{
         this.transactions = new ArrayList<>();
     }
 
-    // Deposit method with lock for thread safety; Satisfies Rule LCK08-J
+    // Deposit method with lock for thread safety
     public void deposit(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Deposit amount cannot be negative");
@@ -36,8 +44,7 @@ public class Bank implements Cloneable{
         }
     }
 
-    // Withdraw method with lock for thread safety; Satisfies Rule LCK08-J
-    // Also Rule SEC04-J, protecting sensitive operations
+    // Withdraw method with lock for thread safety
     public void withdraw(double amount) throws InsufficientFundsException {
         if (amount < 0) { // Error checking for negative amounts
             throw new IllegalArgumentException("Withdrawal amount cannot be negative");
@@ -55,7 +62,7 @@ public class Bank implements Cloneable{
         }
     }
 
-    // Get Balance method with lock for thread safety; Satisfies Rule LCK08-J
+    // Get Balance method with lock for thread safety
     public double getBalance() {
         lock.lock();
         try {

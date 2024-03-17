@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -6,6 +7,7 @@ public class Bank implements Cloneable{
     private static final double MAX_BALANCE = 1000000.0;
     private double balance;
     private final Lock lock = new ReentrantLock();
+    private ArrayList<Transaction> transactions;
 
     // Constructor for Bank
     public Bank(double initialBalance) {
@@ -14,6 +16,7 @@ public class Bank implements Cloneable{
             throw new IllegalArgumentException("Initial balance cannot be negative");
         }
         this.balance = initialBalance;
+        this.transactions = new ArrayList<>();
     }
 
     // Deposit method with lock for thread safety; Satisfies Rule LCK08-J
@@ -24,6 +27,7 @@ public class Bank implements Cloneable{
         lock.lock();
         try {
             balance += amount;
+            transactions.add(new Transaction(amount, System.currentTimeMillis()));
             if (balance > MAX_BALANCE) {
                 balance = MAX_BALANCE;
             }
@@ -42,6 +46,7 @@ public class Bank implements Cloneable{
         try {
             if (balance >= amount) {
                 balance -= amount;
+                transactions.add(new Transaction(-amount, System.currentTimeMillis()));
             } else { // Error check for if withdrawing more than what is in the account.
                 throw new InsufficientFundsException("Insufficient funds for withdrawal");
             }
@@ -58,6 +63,10 @@ public class Bank implements Cloneable{
         } finally { // Unlock after getting the balance
             lock.unlock();
         }
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
     // Protection against cloning sensitive classes for Rule OBJ07-J

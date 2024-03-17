@@ -15,6 +15,7 @@ MET00 - Ensure method arguments are compatible with what you do with the variabl
 FIO14 - Perform proper cleanup at program termination.
 MET05 - Ensure that constructors do not call overridable methods.
 MET12 - Do not use finalizers.
+FIO08-J: Distinguish between characters or bytes read from a stream and –1 
 
 Recommendations used:
 EXP51 - Do not perform assignments in conditional expressions.
@@ -77,10 +78,14 @@ public class ATM {
                     System.out.println("Withdrawal successful.\n");
                     break;
                 case 4:
+                    System.out.println("Deposit From File.\n");
+                    depositFromFile(account);
+                    break;
+                case 5:
                     System.out.println("Thank you for using the ATM.");
                     scanner.close();
                     printReciept(account);
-                    System.exit(0); //FIO14
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.\n");
@@ -93,7 +98,8 @@ public class ATM {
         System.out.println("1. Check Balance");
         System.out.println("2. Deposit");
         System.out.println("3. Withdraw");
-        System.out.println("4. Exit");
+        System.out.println("4. Read from file");
+        System.out.println("5. Exit");
         System.out.print("Choose an option: ");
     }
 
@@ -113,6 +119,26 @@ public class ATM {
             }
         }
         System.out.println("Current balance: $" + account.getBalance());
+    }
+
+    private static void depositFromFile(Bank account) {
+        System.out.print("Enter the file name for deposit: ");
+        Scanner scanner = new Scanner(System.in);
+        String filePath = scanner.nextLine();
+
+        try (Scanner fileScanner = new Scanner(new File(filePath))) {
+            while (fileScanner.hasNextDouble()) {
+                double depositAmount = fileScanner.nextDouble();
+                try {
+                    account.deposit(depositAmount);
+                    System.out.println("Deposit of $" + depositAmount + " successful.");
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage() + "\n");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
     }
 }
 

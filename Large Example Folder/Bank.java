@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -56,17 +55,6 @@ public class Bank {
             return balance;
         } finally { // Unlock after getting the balance
             lock.unlock();
-        }
-    }
-
-    public static void main(String[] args) {
-        Bank account = new Bank(1000.0);
-        try {
-            account.deposit(500.0);
-            account.withdraw(200.0);
-            System.out.println("Current balance: " + account.getBalance());
-        } catch (InsufficientFundsException e) {
-            System.out.println("Insufficient funds: " + e.getMessage());
         }
     }
 }

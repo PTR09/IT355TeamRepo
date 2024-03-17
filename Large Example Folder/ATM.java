@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class ATM {
 
-    public static int choice = 0;
+    private static int choice = 0;
 
     public static void main(String[] args) {
         Bank account = new Bank(0.00);

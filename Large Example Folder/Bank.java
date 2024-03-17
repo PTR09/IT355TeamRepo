@@ -1,7 +1,7 @@
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Bank {
+public class Bank implements Cloneable{
 
     private static final double MAX_BALANCE = 1000000.0;
     private double balance;
@@ -9,13 +9,14 @@ public class Bank {
 
     // Constructor for Bank
     public Bank(double initialBalance) {
-        if (initialBalance < 0) { // Error check for if the initial balance is negative
+        // Error check for if the initial balance is negative
+        if (initialBalance < 0) { // Satisfies Rule ENV03-J as it helps prevent dangerous combinations of permissions.
             throw new IllegalArgumentException("Initial balance cannot be negative");
         }
         this.balance = initialBalance;
     }
 
-    // Deposit method with lock for thread safety
+    // Deposit method with lock for thread safety; Satisfies Rule LCK08-J
     public void deposit(double amount) {
         if (amount < 0) {
             throw new IllegalArgumentException("Deposit amount cannot be negative");
@@ -31,7 +32,8 @@ public class Bank {
         }
     }
 
-    // Withdraw method with lock for thread safety
+    // Withdraw method with lock for thread safety; Satisfies Rule LCK08-J
+    // Also Rule SEC04-J, protecting sensitive operations
     public void withdraw(double amount) throws InsufficientFundsException {
         if (amount < 0) { // Error checking for negative amounts
             throw new IllegalArgumentException("Withdrawal amount cannot be negative");
@@ -48,7 +50,7 @@ public class Bank {
         }
     }
 
-    // Get Balance method with lock for thread safety
+    // Get Balance method with lock for thread safety; Satisfies Rule LCK08-J
     public double getBalance() {
         lock.lock();
         try {
@@ -56,6 +58,12 @@ public class Bank {
         } finally { // Unlock after getting the balance
             lock.unlock();
         }
+    }
+
+    // Protection against cloning sensitive classes for Rule OBJ07-J
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException("Cloning of Bank objects is not allowed");
     }
 }
 

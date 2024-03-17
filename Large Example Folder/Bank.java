@@ -3,10 +3,16 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
+Rules:
 LCK08-J: Ensure actively held locks are released on exceptional conditions
 MET01-J: Never use assertions to validate method arguments
 OBJ01-J: Limit accessibility of fields
 OBJ07-J: Sensitive classes must not let themselves be copied 
+
+Recommendations:
+EXP51-J - Do not perform assignments in conditional expressions
+EXP52-J: Use braces for the body of an if, for, or while statement 
+
 
 */
 

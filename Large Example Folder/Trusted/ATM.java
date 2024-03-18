@@ -35,8 +35,9 @@ ERR08 - Do not catch NullPointerException or any of its ancestors
 STR02 - Specify an appropriate locale when comparing locale-dependent data
 
 Recommendations used:
+EXP50 - Do not confuse abstract object equality with reference equality
 EXP51 - Do not perform assignments in conditional expressions.
-EXP51 - Use braces for the body of an if, for, or while statement.
+EXP52 - Use braces for the body of an if, for, or while statement.
 DCL52 - Do not declare more than one variable per declaration.
 DCL50 - Use visually distinct identifiers.
 OBJ54 - Do not attempt to help the garbage collector by setting local reference variables to null.
@@ -55,6 +56,8 @@ public class ATM {
 
     public static void main(String[] args) {
         Bank account = new Bank(0.00);
+        Bank account2 = new Bank(0.00);
+        boolean isSame = account.equals(account2); //EXP50
 
         operations(account);
         

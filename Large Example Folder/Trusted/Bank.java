@@ -18,6 +18,7 @@ EXP51-J - Do not perform assignments in conditional expressions
 EXP52-J: Use braces for the body of an if, for, or while statement 
 MET50-J: Avoid ambiguous or confusing uses of overloading
 ERR50-J: Use exceptions only for exceptional conditions
+EXP50-J: Do not confuse abstract object equality with reference equality
 
 
 */
@@ -94,6 +95,18 @@ public class Bank implements Cloneable{
     @Override
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException("Cloning of Bank objects is not allowed");
+    }
+
+    // Compares balance values of bank objects
+    @Override
+    public boolean equals(Object obj) //EXP50
+    {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Bank other = (Bank) obj;
+        return Double.compare(other.balance, balance) == 0;
     }
 }
 

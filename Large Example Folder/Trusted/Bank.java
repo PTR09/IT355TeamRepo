@@ -24,6 +24,7 @@ ERR50-J: Use exceptions only for exceptional conditions
 
 public class Bank implements Cloneable{
 
+    // OBJ01-J: Limit accessibility of fields
     private static final double MAX_BALANCE = 1000000.0;
     private double balance;
     private final Lock lock = new ReentrantLock();
@@ -32,14 +33,14 @@ public class Bank implements Cloneable{
     // Constructor for Bank
     public Bank(double initialBalance) {
         // Error check for if the initial balance is negative
-        if (initialBalance < 0) { // Satisfies Rule ENV03-J as it helps prevent dangerous combinations of permissions.
+        if (initialBalance < 0) {
             throw new IllegalArgumentException("Initial balance cannot be negative");
         }
         this.balance = initialBalance;
         this.transactions = new ArrayList<>();
     }
 
-    // Deposit method with lock for thread safety
+    // Deposit method with lock for thread safety LCK08
     final public void deposit(double amount) { // MET03
         if (amount < 0) {
             throw new IllegalArgumentException("Deposit amount cannot be negative");

@@ -45,7 +45,7 @@ ERR50 - Use exceptions only for exceptional conditions
 
 */
 
-
+// ATM class to do bank operations
 public class ATM {
 
     private static int choice = 0; //SEC05, OBJ10, DCL53
@@ -57,7 +57,8 @@ public class ATM {
         operations(account);
         
     }
-
+    
+    // Takes the user's input to perform a specific bank operations  
     private static void operations(Bank account) { //MET00
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -112,6 +113,7 @@ public class ATM {
         }
     }
 
+    // Prints the menu for the user's choice input
     private static void printMenu() {
         System.out.println("Welcome " + user + " to the ATM.");
         System.out.println("1. Check Balance");
@@ -122,6 +124,7 @@ public class ATM {
         System.out.print("Choose an option: ");
     }
 
+    // Prints the reciept of deposit and withdrawals along with the date and time
     private static void printReciept(Bank account) {
         ArrayList<Transaction> transactions = account.getTransactions();
         System.out.println("Transaction history: ");
@@ -140,6 +143,7 @@ public class ATM {
         System.out.println("Current balance: $" + account.getBalance());
     }
 
+    // Allows a user to desposit from a file, Ex. depositing a check
     private static void depositFromFile(Bank account) {
         System.out.print("Enter the file name for deposit: ");
         Scanner scanner = new Scanner(System.in);
@@ -169,9 +173,11 @@ public class ATM {
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }
+        scanner.close();
     }
 }
 
+// Transaction class to create an object that holds amount and timestamp
 class Transaction {
     private double amount; //DCL52, OBJ54
     private long timestamp;

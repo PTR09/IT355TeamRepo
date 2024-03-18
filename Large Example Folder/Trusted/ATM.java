@@ -31,6 +31,8 @@ ENV02 - Do not trust the values of environment variables.
 FIO02 - Detect and handle file-related errors
 IDS01 - Normalize Strings before validating them.
 ENV01 - Place all security-sensitive code in a single JAR and sign and seal it
+ERR08 - Do not catch NullPointerException or any of its ancestors
+STR02 - Specify an appropriate locale when comparing locale-dependent data
 
 Recommendations used:
 EXP51 - Do not perform assignments in conditional expressions.
@@ -61,6 +63,8 @@ public class ATM {
     // Takes the user's input to perform a specific bank operations  
     private static void operations(Bank account) { //MET00
         Scanner scanner = new Scanner(System.in);
+        //STR02
+        Locale.setDefault(Locale.ENGLISH);
         while (true) {
             printMenu();
 
@@ -78,6 +82,9 @@ public class ATM {
                 case 2:
                     System.out.print("Enter deposit amount: ");
                     double depositAmount = scanner.nextDouble();
+                     //This prevents a null value from being passed (ERR08)
+                    if (depositAmount = null) 
+                        depositAmoutn = 0;
                     try {
                     account.deposit(depositAmount);
                     } catch (IllegalArgumentException e) {
@@ -89,6 +96,9 @@ public class ATM {
                 case 3:
                     System.out.print("Enter withdrawal amount: ");
                     double withdrawAmount = scanner.nextDouble();
+                    //This prevents a null value from being passed (ERR08)
+                    if (withdrawAmount = null)
+                        withdrawAmount = 0;
                     try {
                         account.withdraw(withdrawAmount);
                     } catch (InsufficientFundsException e) {

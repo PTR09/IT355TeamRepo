@@ -18,33 +18,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* Rules used:
-SEC05 - All fields that shouldn't be accessed outside the class should be private.
-EXP00 - Do not ignore values returned by methods.
-OBJ10 - Do not use public static nonfinal fields.
-OBJ11 - Be wary of letting constructors throw exceptions.
-MET00 - Ensure method arguments are compatible with what you do with the variable.
-FIO14 - Perform proper cleanup at program termination.
-MET05 - Ensure that constructors do not call overridable methods.
-MET12 - Do not use finalizers.
-FIO08 - Distinguish between characters or bytes read from a stream and –1 
-ENV02 - Do not trust the values of environment variables.
-FIO02 - Detect and handle file-related errors
-IDS01 - Normalize Strings before validating them.
-ENV01 - Place all security-sensitive code in a single JAR and sign and seal it
-ERR08 - Do not catch NullPointerException or any of its ancestors
-STR02 - Specify an appropriate locale when comparing locale-dependent data
+SEC05-J - All fields that shouldn't be accessed outside the class should be private.
+EXP00-J - Do not ignore values returned by methods.
+OBJ10-J - Do not use public static nonfinal fields.
+OBJ11-J - Be wary of letting constructors throw exceptions.
+MET00-J - Ensure method arguments are compatible with what you do with the variable.
+FIO14-J - Perform proper cleanup at program termination.
+MET05-J - Ensure that constructors do not call overridable methods.
+MET12-J - Do not use finalizers.
+FIO08-J - Distinguish between characters or bytes read from a stream and –1 
+ENV02-J - Do not trust the values of environment variables.
+FIO02-J - Detect and handle file-related errors
+IDS01-J - Normalize Strings before validating them.
+ENV01-J - Place all security-sensitive code in a single JAR and sign and seal it
+ERR08-J - Do not catch NullPointerException or any of its ancestors
+STR02-J - Specify an appropriate locale when comparing locale-dependent data
 
 Recommendations used:
-EXP50 - Do not confuse abstract object equality with reference equality
-EXP51 - Do not perform assignments in conditional expressions.
-EXP52 - Use braces for the body of an if, for, or while statement.
-DCL52 - Do not declare more than one variable per declaration.
-DCL50 - Use visually distinct identifiers.
-OBJ54 - Do not attempt to help the garbage collector by setting local reference variables to null.
-DCL53 - Minimize the scope of variables.
-MET50 - Avoid ambiguous or confusing uses of overloading
-IDS50 - Use conservative file naming conventions
-ERR50 - Use exceptions only for exceptional conditions
+EXP50-J - Do not confuse abstract object equality with reference equality
+EXP51-J - Do not perform assignments in conditional expressions.
+EXP52-J - Use braces for the body of an if, for, or while statement.
+DCL52-J - Do not declare more than one variable per declaration.
+DCL50-J - Use visually distinct identifiers.
+OBJ54-J - Do not attempt to help the garbage collector by setting local reference variables to null.
+DCL53-J - Minimize the scope of variables.
+MET50-J - Avoid ambiguous or confusing uses of overloading
+IDS50-J - Use conservative file naming conventions
+ERR50-J - Use exceptions only for exceptional conditions
 
 */
 

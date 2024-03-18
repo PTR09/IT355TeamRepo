@@ -172,7 +172,7 @@ public class ATM {
 
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
             while (fileScanner.hasNextDouble()) {
-                double depositAmount = fileScanner.nextDouble();
+                double depositAmount = fileScanner.nextDouble(); // FIO08
                 try {
                     account.deposit(depositAmount);
                     System.out.println("Deposit of $" + depositAmount + " successful.");

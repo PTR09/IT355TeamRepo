@@ -19,7 +19,7 @@ FIO08-J: Distinguish between characters or bytes read from a stream and –1
 
 Recommendations used:
 EXP51 - Do not perform assignments in conditional expressions.
-EXP51 - Use braces for the body of an if, for, or while statement.
+EXP52 - Use braces for the body of an if, for, or while statement.
 DCL52 - Do not declare more than one variable per declaration.
 DCL50 - Use visually distinct identifiers.
 OBJ54 - Do not attempt to help the garbage collector by setting local reference variables to null.

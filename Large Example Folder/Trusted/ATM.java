@@ -28,7 +28,7 @@ MET05 - Ensure that constructors do not call overridable methods.
 MET12 - Do not use finalizers.
 FIO08 - Distinguish between characters or bytes read from a stream and –1 
 ENV02 - Do not trust the values of environment variables.
-FIO14 - Perform proper cleanup at program termination.
+FIO02 - Detect and handle file-related errors
 IDS01 - Normalize Strings before validating them.
 ENV01 - Place all security-sensitive code in a single JAR and sign and seal it
 
@@ -170,7 +170,7 @@ public class ATM {
                     System.out.println(e.getMessage() + "\n");
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { //FIO02
             System.out.println("File not found.");
         }
         scanner.close();

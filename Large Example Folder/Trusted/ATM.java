@@ -100,8 +100,8 @@ public class ATM {
                     System.out.print("Enter withdrawal amount: ");
                     double withdrawAmount = scanner.nextDouble();
                     //This prevents a null value from being passed (ERR08)
-                    if (withdrawAmount = null)
-                        withdrawAmount = 0;
+                    //if (withdrawAmount = null)
+                        //withdrawAmount = 0;
                     try {
                         account.withdraw(withdrawAmount);
                     } catch (InsufficientFundsException e) {

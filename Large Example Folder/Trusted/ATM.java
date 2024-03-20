@@ -85,9 +85,9 @@ public class ATM {
                 case 2:
                     System.out.print("Enter deposit amount: ");
                     double depositAmount = scanner.nextDouble();
-                     //This prevents a null value from being passed (ERR08)
-                    if (depositAmount = null) 
-                        depositAmoutn = 0;
+                    //This prevents a null value from being passed (ERR08)
+                    //if (depositAmount = null) 
+                        //depositAmoutn = 0;
                     try {
                     account.deposit(depositAmount);
                     } catch (IllegalArgumentException e) {

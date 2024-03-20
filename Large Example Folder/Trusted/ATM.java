@@ -67,7 +67,7 @@ public class ATM {
     private static void operations(Bank account) { //MET00
         Scanner scanner = new Scanner(System.in);
         //STR02
-        Locale.setDefault(Locale.ENGLISH);
+        //Locale.setDefault(Locale.ENGLISH);
         while (true) {
             printMenu();
 

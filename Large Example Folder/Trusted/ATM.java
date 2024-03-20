@@ -186,7 +186,7 @@ public class ATM {
         } catch (FileNotFoundException e) { //FIO02
             System.out.println("File not found.");
         }
-        scanner.close();
+        //scanner.close();
     }
 }
 
